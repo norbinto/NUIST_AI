@@ -49,6 +49,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WriteableBitmapEx.Wpf, Version=1.5.0.0, Culture=neutral, PublicKeyToken=50375ca6144f1c69, processorArchitecture=MSIL">
+      <HintPath>..\packages\WriteableBitmapEx.1.5.1.0\lib\net40\WriteableBitmapEx.Wpf.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -59,6 +62,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Graph\BreadthFirstSearcher.cs" />
+    <Compile Include="Graph\DeepFirstSearcher.cs" />
+    <Compile Include="Graph\GraphSearcher.cs" />
+    <Compile Include="Graph\Node.cs" />
+    <Compile Include="Graph\Searcher.cs" />
+    <Compile Include="MazeGame\Map.cs" />
+    <Compile Include="MazeGame\MazeState.cs" />
+    <Compile Include="MazeGame\OperatorRight.cs" />
+    <Compile Include="MazeGame\OperatorLeft.cs" />
+    <Compile Include="MazeGame\OperatorDown.cs" />
+    <Compile Include="MazeGame\OperatorUp.cs" />
+    <Compile Include="StateRepresentation\State.cs" />
+    <Compile Include="StateRepresentation\HeuristicState.cs" />
+    <Compile Include="StateRepresentation\CostOperator.cs" />
+    <Compile Include="StateRepresentation\Operator.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -86,6 +104,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -93,6 +112,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GUI\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
