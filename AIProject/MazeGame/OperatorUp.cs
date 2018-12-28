@@ -3,8 +3,12 @@ using System;
 
 namespace AIProject.MazeGame
 {
-    public class OperatorUp : Operator
+    public class OperatorUp : Operator, CostOperator
     {
+        public double Cost(State state)
+        {
+            return 1;
+        }
 
         public override State Invoke(State currentState)
         {

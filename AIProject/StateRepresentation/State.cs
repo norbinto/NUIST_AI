@@ -3,28 +3,27 @@ using System.Collections.Generic;
 
 namespace StateRepresentation
 {
-  public class OperatorDoesNotExistsException : Exception
-  {
-    public override string ToString()
+    public class OperatorDoesNotExistsException : Exception
     {
-      return "Operator does not exists!";
-    }
-  }
-
-  public abstract class State
-  {
-        
-    protected static ICollection<Operator> operators;
-    public static ICollection<Operator> Operators
-    {
-      get
-      {
-        return operators;
-      }
+        public override string ToString()
+        {
+            return "Operator does not exists!";
+        }
     }
 
-    public abstract bool IsGoalState();
-    public abstract bool IsApplicatable( Operator op );
-    //public abstract State Execute( Operator op );
-  }
+    public abstract class State
+    {
+
+        protected static ICollection<Operator> operators;
+        public static ICollection<Operator> Operators
+        {
+            get
+            {
+                return operators;
+            }
+        }
+
+        public abstract bool IsGoalState();
+        public abstract bool IsApplicatable(Operator op);
+    }
 }

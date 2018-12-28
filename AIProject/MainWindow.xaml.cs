@@ -23,12 +23,18 @@ namespace AIProject
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static bool ISPRINTDETAILEDSOLUTION = false;
+        public static bool ISPRINTSOLUTION = true;
         public MainWindow()
         {
             InitializeComponent();
             MazeState state = new MazeState();
-            var dfs = new BreadthFirstSearcher(state);
+            var dfs = new DeepFirstSearcher(state);
             dfs.Search();
+            var bfs = new BreadthFirstSearcher(state);
+            bfs.Search();
+            var ast = new AStarSearcher(state);
+            ast.Search();
         }
 
         int width, height;

@@ -1,9 +1,10 @@
 ﻿using StateRepresentation;
+using System;
 using System.Collections.Generic;
 
 namespace AIProject.MazeGame
 {
-    public class MazeState : State
+    public class MazeState : HeuristicState
     {
         private int _posX;
         private int _posY;
@@ -31,7 +32,7 @@ namespace AIProject.MazeGame
         public override bool IsApplicatable(Operator op)
         {
             var tmpState = op.Invoke(this);
-            if (tmpState is MazeState && Map.CurrentMap[((MazeState)tmpState).PosX, ((MazeState)tmpState).PosY] > 0)
+            if (tmpState is MazeState && Map.CurrentMap[((MazeState)tmpState).PosY, ((MazeState)tmpState).PosX] > 0)
             {
                 return true;
             }
@@ -59,5 +60,24 @@ namespace AIProject.MazeGame
         {
             return base.GetHashCode();
         }
+
+        protected double heuristic;
+        public override double Heuristic()
+        {
+            if (Math.Abs(heuristic) < double.Epsilon)
+                InitHeuristic();
+            return heuristic;
+        }
+
+        private void InitHeuristic()
+        {
+            heuristic = ComputeHeuristic(PosX, PosY, Map.GetGoalPositionX(), Map.GetGoalPositionY());
+        }
+
+        private double ComputeHeuristic(int posX, int posY, int goalX, int goalY)
+        {
+            return Math.Pow(posX - goalX, 2) + Math.Pow(posY - goalY, 2);
+        }
+
     }
 }

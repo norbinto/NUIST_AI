@@ -17,10 +17,10 @@ namespace AIProject.MazeGame
                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
                 {0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0 },
                 {0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0 },
-                {0,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,0 },
                 {0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0 },
-                {0,1,1,1,1,1,1,3,1,1,1,1,1,1,1,1,1,0 },
-                {0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0 },
+                {0,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,0 },
+                {0,1,1,1,1,2,0,3,0,1,1,1,1,1,1,1,1,0 },
+                {0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,0 },
                 {0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0 },
                 {0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0 },
                 {0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0 },
@@ -34,18 +34,43 @@ namespace AIProject.MazeGame
             {
                 for (int x = 0; x < CurrentMap.GetLength(1); x++)
                 {
-                    if (CurrentMap[y,x]==2) { return x; }
+                    if (CurrentMap[y, x] == 2) { return x; }
                 }
             }
             return -1;
         }
 
-        public static int GetStartPositonY() {
+        public static int GetStartPositonY()
+        {
             for (int y = 0; y < CurrentMap.GetLength(0); y++)
             {
                 for (int x = 0; x < CurrentMap.GetLength(1); x++)
                 {
                     if (CurrentMap[y, x] == 2) { return y; }
+                }
+            }
+            return -1;
+        }
+
+        public static int GetGoalPositionX()
+        {
+            for (int y = 0; y < CurrentMap.GetLength(0); y++)
+            {
+                for (int x = 0; x < CurrentMap.GetLength(1); x++)
+                {
+                    if (CurrentMap[y, x] == 3) { return x; }
+                }
+            }
+            return -1;
+        }
+
+        public static int GetGoalPositionY()
+        {
+            for (int y = 0; y < CurrentMap.GetLength(0); y++)
+            {
+                for (int x = 0; x < CurrentMap.GetLength(1); x++)
+                {
+                    if (CurrentMap[y, x] == 3) { return y; }
                 }
             }
             return -1;

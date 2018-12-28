@@ -1,7 +1,7 @@
 ﻿namespace StateRepresentation
 {
-  public interface HeuristicState
-  {
-    double Heuristic();
-  }
+    public abstract class HeuristicState : State
+    {
+        public abstract double Heuristic();
+    }
 }

@@ -30,19 +30,26 @@ namespace AIProject.Graph
         {
             while (opens.Count > 0)
             {
+                if (MainWindow.ISPRINTDETAILEDSOLUTION)
+                {
+                    PrintDatabase();
+                }
                 Node currentNode = opens[0];
                 if (currentNode.CurrentState.IsGoalState())
                 {
                     goalStates.Add(currentNode);
-                    Console.WriteLine("solution:");
-                    PrintSolution(currentNode);
+                    if (MainWindow.ISPRINTDETAILEDSOLUTION || MainWindow.ISPRINTSOLUTION)
+                    {
+                        Console.WriteLine("solution:");
+                        PrintSolution(currentNode);
+                    }
                     break;
                 }
                 opens.Remove(currentNode);
                 closeds.Add(currentNode);
                 Extract(currentNode);
             }
-            Console.WriteLine("opens: " + opens.Count +
+            Console.WriteLine("BFS opens: " + opens.Count +
                                ", closeds: " + closeds.Count);
         }
 
