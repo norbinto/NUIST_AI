@@ -19,15 +19,6 @@ namespace AIProject.Graph
             }
         }
 
-        //public new HeuristicState currentState;
-        //public new HeuristicState CurrentState
-        //{
-        //    get
-        //    {
-        //        return currentState;
-        //    }
-        //}
-
         public AStarNode(State start)
           : base(start)
         {

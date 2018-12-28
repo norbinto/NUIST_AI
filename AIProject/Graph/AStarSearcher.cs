@@ -25,28 +25,28 @@ namespace AIProject.Graph
             foreach (Operator op in State.Operators)
                 if (node.CurrentState.IsApplicatable(op))
                 {
-                    AStarNode uj = new AStarNode((AStarNode)node, op);
+                    AStarNode newNode = new AStarNode((AStarNode)node, op);
                     int index;
-                    if ((index = opens.IndexOf(uj)) != -1)
+                    if ((index = opens.IndexOf(newNode)) != -1)
                     {
-                        AStarNode regi = (AStarNode)opens[index];
-                        if (uj.Cost < regi.Cost)
+                        AStarNode oldNode = (AStarNode)opens[index];
+                        if (newNode.Cost < oldNode.Cost)
                         {
-                            opens.Remove(regi);
-                            opens.Add(uj);
+                            opens.Remove(oldNode);
+                            opens.Add(newNode);
                         }
                     }
-                    else if ((index = closeds.IndexOf(uj)) != -1)
+                    else if ((index = closeds.IndexOf(newNode)) != -1)
                     {
-                        AStarNode regi = (AStarNode)closeds[index];
-                        if (uj.Cost < regi.Cost)
+                        AStarNode oldNode = (AStarNode)closeds[index];
+                        if (newNode.Cost < oldNode.Cost)
                         {
-                            closeds.Remove(regi);
-                            opens.Add(uj);
+                            closeds.Remove(oldNode);
+                            opens.Add(newNode);
                         }
                     }
                     else
-                        opens.Add(uj);
+                        opens.Add(newNode);
                 }
         }
 
@@ -72,7 +72,7 @@ namespace AIProject.Graph
                 opens.Remove(currentNode);
                 closeds.Add(currentNode);
                 Extract(currentNode);
-                opens.Sort(new AAlgoritmusRendezo());
+                opens.Sort(new AAlgoritmusSorter());
             }
             Console.WriteLine("A Star opens: " + opens.Count +
                                ", closeds: " + closeds.Count);
@@ -85,7 +85,7 @@ namespace AIProject.Graph
 
 
 
-        private class AAlgoritmusRendezo : IComparer<Node>
+        private class AAlgoritmusSorter : IComparer<Node>
         {
             int IComparer<Node>.Compare(Node node1, Node node2)
             {
@@ -93,10 +93,6 @@ namespace AIProject.Graph
                                  aNode2 = (AStarNode)node2;
                 return ((aNode1.CurrentState as HeuristicState).Heuristic() + aNode1.Cost).CompareTo(
                          (aNode2.CurrentState as HeuristicState).Heuristic() + aNode2.Cost);
-#warning 0 heuristics
-                //return (0 + aNode1.Cost).CompareTo(
-                //         0 + aNode2.Cost);
-
             }
         }
 
