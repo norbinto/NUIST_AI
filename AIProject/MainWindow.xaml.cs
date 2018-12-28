@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AIProject.Graph;
+using AIProject.MazeGame;
+using StateRepresentation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +26,29 @@ namespace AIProject
         public MainWindow()
         {
             InitializeComponent();
+            MazeState state = new MazeState();
+            var dfs = new BreadthFirstSearcher(state);
+            dfs.Search();
+        }
+
+        int width, height;
+        WriteableBitmap writeableBitmap;
+
+        private void ViewPort_Loaded(object sender, RoutedEventArgs e)
+        {
+            width = (int)this.ViewPortContainer.ActualWidth;
+            height = (int)this.ViewPortContainer.ActualHeight;
+            writeableBitmap = BitmapFactory.New(width,height);
+            ViewPort.Source = writeableBitmap;
+
+            CompositionTarget.Rendering +=CompositionTarget_Rendering;
+                        
+        }
+
+        private void CompositionTarget_Rendering(object sender, EventArgs e)
+        {
+            //writeableBitmap.DrawLine(0,0,width,height,Colors.Red);
+            //throw new NotImplementedException();
         }
     }
 }
