@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AIProject.Graph
@@ -52,17 +53,18 @@ namespace AIProject.Graph
 
         public override void Search()
         {
+            AStarNode currentNode = null;
             while (opens.Count > 0)
             {
-                if (MainWindow.ISPRINTDETAILEDSOLUTION)
+                if (MainWindow.IS_PRINT_DETAILED_SOLUTION)
                 {
                     PrintDatabase();
                 }
-                AStarNode currentNode = (AStarNode)opens[0];
+                currentNode = (AStarNode)opens[0];
                 if (currentNode.CurrentState.IsGoalState())
                 {
                     goalStates.Add(currentNode);
-                    if (MainWindow.ISPRINTDETAILEDSOLUTION || MainWindow.ISPRINTSOLUTION)
+                    if (MainWindow.IS_PRINT_DETAILED_SOLUTION || MainWindow.IS_PRINT_SOLUTION)
                     {
                         Console.WriteLine("solution");
                         PrintSolution(currentNode);
@@ -73,10 +75,32 @@ namespace AIProject.Graph
                 closeds.Add(currentNode);
                 Extract(currentNode);
                 opens.Sort(new AAlgoritmusSorter());
+                lock (MainWindow.opens)
+                {
+                    MainWindow.opens.Clear();
+                    foreach (Node n in opens)
+                        MainWindow.opens.Add(n);
+
+                }
+                lock (MainWindow.closeds)
+                {
+                    MainWindow.closeds.Clear();
+                    foreach (Node n in closeds)
+                        MainWindow.closeds.Add(n);
+
+                }
+
+                Thread.Sleep(MainWindow.TIME_BETWEEN_ITERATIONS);
             }
             Console.WriteLine("A Star opens: " + opens.Count +
                                ", closeds: " + closeds.Count);
+            lock (MainWindow.SearchIsReady)
+            {
+                MainWindow.SearchIsReady = currentNode;
+            }
         }
+
+       
 
         public override string ToString()
         {

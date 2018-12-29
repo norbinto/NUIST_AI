@@ -1,5 +1,6 @@
 ﻿using StateRepresentation;
 using System;
+using System.Threading;
 
 namespace AIProject.Graph
 {
@@ -30,17 +31,18 @@ namespace AIProject.Graph
 
         public override void Search()
         {
+            Node currentNode = null;
             while (opens.Count > 0)
             {
-                if (MainWindow.ISPRINTDETAILEDSOLUTION)
+                if (MainWindow.IS_PRINT_DETAILED_SOLUTION)
                 {
                     PrintDatabase();
                 }
-                Node currentNode = opens[0];
+                currentNode = opens[0];
                 if (currentNode.CurrentState.IsGoalState())
                 {
                     goalStates.Add(currentNode);
-                    if (MainWindow.ISPRINTDETAILEDSOLUTION || MainWindow.ISPRINTSOLUTION)
+                    if (MainWindow.IS_PRINT_DETAILED_SOLUTION || MainWindow.IS_PRINT_SOLUTION)
                     {
                         Console.WriteLine("solution:");
                         PrintSolution(currentNode);
@@ -50,10 +52,28 @@ namespace AIProject.Graph
                 opens.Remove(currentNode);
                 closeds.Add(currentNode);
                 Extract(currentNode);
+                lock (MainWindow.opens)
+                {
+                    MainWindow.opens.Clear();
+                    foreach (Node n in opens)
+                        MainWindow.opens.Add(n);
+
+                }
+                lock (MainWindow.closeds)
+                {
+                    MainWindow.closeds.Clear();
+                    foreach (Node n in closeds)
+                        MainWindow.closeds.Add(n);
+
+                }
+                Thread.Sleep(MainWindow.TIME_BETWEEN_ITERATIONS);
             }
             Console.WriteLine("DFS opens: " + opens.Count +
                                ", closeds: " + closeds.Count);
-
+            lock (MainWindow.SearchIsReady)
+            {
+                MainWindow.SearchIsReady = currentNode;
+            }
         }
 
         public override string ToString()

@@ -68,6 +68,7 @@
     <Compile Include="Graph\DeepFirstSearcher.cs" />
     <Compile Include="Graph\GraphSearcher.cs" />
     <Compile Include="Graph\Node.cs" />
+    <Compile Include="Graph\OpensClosedsFoundEventArgs.cs" />
     <Compile Include="Graph\Searcher.cs" />
     <Compile Include="MazeGame\Map.cs" />
     <Compile Include="MazeGame\MazeState.cs" />
