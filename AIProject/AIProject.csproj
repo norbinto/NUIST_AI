@@ -68,7 +68,6 @@
     <Compile Include="Graph\DeepFirstSearcher.cs" />
     <Compile Include="Graph\GraphSearcher.cs" />
     <Compile Include="Graph\Node.cs" />
-    <Compile Include="Graph\OpensClosedsFoundEventArgs.cs" />
     <Compile Include="Graph\Searcher.cs" />
     <Compile Include="MazeGame\Map.cs" />
     <Compile Include="MazeGame\MazeState.cs" />
@@ -112,12 +111,12 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="RelatedDocuments\Norbert_AI.docx" />
+    <None Include="RelatedDocuments\Norbert_AI.pptx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GUI\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

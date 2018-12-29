@@ -105,10 +105,11 @@ namespace AIProject
             }
 
 
-            while (SearchIsReady!=null && SearchIsReady.CurrentState != null){
+            while (SearchIsReady!=null && SearchIsReady.CurrentState != null && IS_PRINT_SOLUTION)
+            {
                 opens.Clear();
                 closeds.Clear();
-                var color = Colors.Green;
+                var color = Colors.DarkGreen;
                 writeableBitmap.FillEllipseCentered((SearchIsReady.CurrentState as MazeState).PosX * SIZE_OF_RECTANGLES + SIZE_OF_RECTANGLES / 2, (SearchIsReady.CurrentState as MazeState).PosY * SIZE_OF_RECTANGLES + SIZE_OF_RECTANGLES / 2, SIZE_OF_RECTANGLES / 2, SIZE_OF_RECTANGLES / 2, color);
 
                 SearchIsReady = SearchIsReady.Parent;
